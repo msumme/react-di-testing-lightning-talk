@@ -7,12 +7,28 @@
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-flow": "^6.23.0",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
+    "react-addons-test-utils": "^15.5.1",
+    "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "babel": {
+    "plugins": [
+      "transform-react-jsx"
+    ],
+    "presets": [
+      "env",
+      "flow"
+    ]
   }
 }
