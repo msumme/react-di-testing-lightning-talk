@@ -8,15 +8,18 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
 });
 
-it('loads some content when I click a button', () => {
+it('loads some content when I click a button', async () => {
 
   // given
-  const wrapper = shallow(<App />);
+  const promise = Promise.resolve("Some new content");
+  const stubLoader = () => promise;
+  const wrapper = shallow(<App contentLoader={stubLoader}/>);
   const contentToLoad = "Some new content";
   expect(wrapper.find('.content').text()).toEqual("Initial Content");
 
     // when
-  wrapper.find(Button).simulate('click');
+  wrapper.find('button').simulate('click');
+  await promise;
   wrapper.update();
 
   // then

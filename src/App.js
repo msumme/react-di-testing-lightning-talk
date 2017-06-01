@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   clickHandler() {
-    contentLoader().then((content) => {
+    this.props.contentLoader().then((content) => {
       this.setState(function() {
         return {content};
       })
@@ -63,6 +63,10 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.defaultProps = {
+  contentLoader
 }
 
 export default App;
