@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const contentLoader = () => {
+  return fetch('/contentsFile').then((response) => {
+    return response.text();
+  });
+};
+
 class App extends Component {
 
   constructor(props) {
@@ -14,11 +20,7 @@ class App extends Component {
   }
 
   clickHandler() {
-
-    fetch('/contentsFile').then((response) => {
-      return response.text();
-    }).then((content) => {
-
+    contentLoader().then((content) => {
       this.setState(function() {
         return {content};
       })
