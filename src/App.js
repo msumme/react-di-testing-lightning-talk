@@ -12,10 +12,19 @@ const contentLoader = () => {
 /**
  4 possibilities:
  Create a function that wraps the class that is also exported
+  - Still sucks but avoids problem w/ default props.
  Pass it in with default props
+  - Not a bad solution - requires test cases to look slightly funny and no longer
+    function as well as documentation.
  Force it to always be passed in as a prop
+  - If this was more than one level deep, that totally stinks, bc imagine passing
+    everything from top to bottom, no thanks.
  Use the context from a wrapping component
+  - Sucks b/c you have to wrap the component even when testing inside of a component
+    that provides the context
  */
+
+
 
 
 class App extends Component {
