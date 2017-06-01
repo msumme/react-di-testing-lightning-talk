@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App, {builder} from './App';
 import {shallow} from 'enzyme';
 
 it('renders without crashing', () => {
@@ -13,7 +13,8 @@ it('loads some content when I click a button', async () => {
   // given
   const promise = Promise.resolve("Some new content");
   const stubLoader = () => promise;
-  const wrapper = shallow(<App contentLoader={stubLoader}/>);
+  const App = builder(stubLoader);
+  const wrapper = shallow(<App />);
   const contentToLoad = "Some new content";
   expect(wrapper.find('.content').text()).toEqual("Initial Content");
 

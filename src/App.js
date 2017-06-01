@@ -12,7 +12,8 @@ const contentLoader = () => {
 /**
  4 possibilities:
  Create a function that wraps the class that is also exported
-  - Still sucks but avoids problem w/ default props.
+  - Still sucks but avoids problem w/ default props.  Extra layer of indirection is ugly
+    in your implementation class.
  Pass it in with default props
   - Not a bad solution - requires test cases to look slightly funny and no longer
     function as well as documentation.
@@ -24,49 +25,49 @@ const contentLoader = () => {
     that provides the context
  */
 
+function builder(contentLoader) {
+  class App extends Component {
 
+    constructor(props) {
+      super(props);
 
+      this.state = {
+        content: "Initial Content"
+      };
+      this.clickHandler = this.clickHandler.bind(this);
+    }
 
-class App extends Component {
+    clickHandler() {
+      contentLoader().then((content) => {
+        this.setState(function() {
+          return {content};
+        })
+      });
+    }
 
-  constructor(props) {
-    super(props);
+    render() {
 
-    this.state = {
-      content: "Initial Content"
-    };
-    this.clickHandler = this.clickHandler.bind(this);
-  }
+      const clickHandler = this.clickHandler;
 
-  clickHandler() {
-    this.props.contentLoader().then((content) => {
-      this.setState(function() {
-        return {content};
-      })
-    });
-  }
-
-  render() {
-
-    const clickHandler = this.clickHandler;
-
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      return (
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>Welcome to React</h2>
+          </div>
+          <p className="content App-intro">
+            {this.state.content}
+          </p>
+          <button onClick={clickHandler}>Click me!</button>
         </div>
-        <p className="content App-intro">
-          {this.state.content}
-        </p>
-        <button onClick={clickHandler}>Click me!</button>
-      </div>
-    );
+      );
+    }
   }
+  return App;
 }
 
-App.defaultProps = {
-  contentLoader
-}
+export default builder(contentLoader);
 
-export default App;
+export {builder};
+
+
