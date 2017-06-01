@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// slight improvement because it can be imported
 const contentLoader = () => {
   return fetch('/contentsFile').then((response) => {
     return response.text();
