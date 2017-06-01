@@ -9,6 +9,15 @@ const contentLoader = () => {
   });
 };
 
+/**
+ 4 possibilities:
+ Create a function that wraps the class that is also exported
+ Pass it in with default props
+ Force it to always be passed in as a prop
+ Use the context from a wrapping component
+ */
+
+
 class App extends Component {
 
   constructor(props) {
