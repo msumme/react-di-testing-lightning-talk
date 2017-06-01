@@ -10,9 +10,25 @@ class App extends Component {
     this.state = {
       content: "Initial Content"
     };
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  clickHandler() {
+
+    fetch('/contentsFile').then((response) => {
+      return response.text();
+    }).then((content) => {
+
+      this.setState(function() {
+        return {content};
+      })
+    });
   }
 
   render() {
+
+    const clickHandler = this.clickHandler;
+
     return (
       <div className="App">
         <div className="App-header">
@@ -22,7 +38,7 @@ class App extends Component {
         <p className="content App-intro">
           {this.state.content}
         </p>
-        <button>Click me!</button>
+        <button onClick={clickHandler}>Click me!</button>
       </div>
     );
   }
